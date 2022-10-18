@@ -1,0 +1,96 @@
+# 1. Напишите программу, которая принимает на вход вещественное число
+# и показывает сумму его цифр .
+# Пример:
+# 67,82 -> 23
+# 0,56 -> 11
+
+float_num = input('input float number: ')
+print(type(float_num))
+sum = 0
+for i in float_num:
+    if i != '.':
+        sum += int(i)
+print(sum)
+
+
+# 2. Напишите программу, которая принимает на вход число N
+# и выдает набор произведений чисел от 1 до N.
+# Пример:
+# пусть N = 4, тогда [ 1, 2, 6, 24 ] (1, 12, 123, 1234)
+
+""" def set_products(n: int) -> list:
+    set = [1]
+    for i in range(2, n+1):
+        set.append(set[-1] * i)
+    return set
+
+n = int(input('Введите натуральное число: '))
+set = set_products(n)
+print(set) """
+
+
+# Задание 3. Задайте список из n чисел последовательности $(1+\frac 1 n)^n$ и 
+# выведите на экран их сумму.
+#Пример:
+#- Для n = 6: {1: 4, 2: 7, 3: 10, 4: 13, 5: 16, 6: 19}
+
+""" import math
+
+def result_dictionary(n: int) -> list:
+    new_list = [2]
+    for num in range(1, n+1):
+        new_list.append(num)
+        new_list.append(math.ceil(new_list[-2]+(1+1/num)**num))
+    new_list.pop(0)
+    result_dict = {new_list[i] : new_list[i+1] for i in range(0, len(new_list), 2)}
+    return result_dict
+
+n = int(input('Введите натуральное число: '))
+my_dictionary = result_dictionary(n)
+print(result_dictionary(n)) """
+
+
+#Задание 4. Задайте список из N элементов, заполненных числами из промежутка [-N, N]. 
+# Найдите произведение элементов на указанных позициях. 
+# Позиции хранятся в файле file.txt в одной строке одно число.
+
+""" import random
+
+def fill_list(n: int) -> list: 
+    new_list = [random.randint(-n, n)]
+    for i in range(1, n):
+        new_list.append(random.randint(-n, n))
+        i += 1
+    return new_list
+
+def writing_file(k: int, n: int):
+   with open('file.txt', 'w') as position:
+       for i in range(k):
+           position.write(f'{random.randint(0, n-1)}\n')
+
+def print_position():
+   path = 'file.txt'
+   position = open(path, 'r')
+   pos_element = []
+   for line in position:
+    pos_element.append(int(line))
+   print(f'Позиции элементов: {pos_element}')
+   position.close()
+   return pos_element
+
+def product_elements(user_list: list, k: int) -> int:
+   path = 'file.txt'
+   position = open(path, 'r')
+   product = 1
+   for line in position:
+    product = product * user_list[int(line)]
+   position.close()
+   return product
+
+n = int(input('Количество элементов: N = '))
+new_list = fill_list(n)
+k = int(input('Количество множителей: k = '))
+writing_file(k, n)
+print(f'Заданный список: {new_list}')
+print_position()
+print(f'Произведение элементов на заданных позициях равно {product_elements(new_list, k)}') """
